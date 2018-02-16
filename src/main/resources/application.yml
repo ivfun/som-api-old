@@ -1,0 +1,12 @@
+server:
+ port: 5151
+ compression:
+   enabled: true
+   mime-types: application/json,application/xml
+   min-response-size: 500
+ context-path: /v1
+
+spring:
+  data:
+    mongodb:
+      database: som

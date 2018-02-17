@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity
  **/
 interface ComponentService
 {
-    fun getAll(): Any
+    fun getAll(): ResponseEntity<Any>
 
     fun save(component: Component): ResponseEntity<Any>
 }

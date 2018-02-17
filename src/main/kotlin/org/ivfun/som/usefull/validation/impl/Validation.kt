@@ -1,7 +1,7 @@
-package org.ivfun.som.usefull.validation
+package org.ivfun.som.usefull.validation.impl
 
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToSave
-import org.ivfun.som.usefull.validation.dto.Response
+import org.ivfun.som.usefull.validation.model.Response
 import java.util.ArrayList
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.javaField
@@ -43,4 +43,5 @@ object Validation
             }
         return field
     }
+
 }

@@ -28,7 +28,7 @@ class Response
     }
 
     @JsonIgnore
-    fun getResponse() : ResponseEntity<Any>
+    fun get() : ResponseEntity<Any>
     {
         if(isValid())
         {

@@ -13,12 +13,22 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping(value = ["/component"])
 class ComponentResource(val service: ComponentService)
 {
-    @GetMapping()
-    fun get(): ResponseEntity<Any> = service.getAll()
-
     @GetMapping(value = ["/fields-to-save"])
-    fun getFieldsToSave(): Map<String, Any> = Fields.getFieldsToSave(Component())
+    fun getFieldsToSave():Map<String,Any> = Fields.getFieldsToSave(Component())
+
+    @GetMapping()
+    fun findAll():ResponseEntity<Any> = service.findAll()
+
+    @GetMapping(value = ["/{id}"])
+    fun findOne(@PathVariable id : String):ResponseEntity<Any> = service.findOne(id)
 
     @PostMapping()
-    fun post(@RequestBody component: Component) : ResponseEntity<Any> = service.save(component)
+    fun create(@RequestBody component: Component):ResponseEntity<Any>  = service.create(component)
+
+    @PutMapping()
+    fun update(@RequestBody component: Component):ResponseEntity<Any>  = service.update(component)
+
+    @DeleteMapping(value = ["/{id}"])
+    fun delete(@PathVariable id : String):ResponseEntity<Any>  = service.delete(id)
+
 }

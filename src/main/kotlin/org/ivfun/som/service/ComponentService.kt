@@ -9,7 +9,13 @@ import org.springframework.http.ResponseEntity
  **/
 interface ComponentService
 {
-    fun getAll(): ResponseEntity<Any>
+    fun findOne(id: String): ResponseEntity<Any>
 
-    fun save(component: Component): ResponseEntity<Any>
+    fun findAll(): ResponseEntity<Any>
+
+    fun create(component: Component): ResponseEntity<Any>
+
+    fun update(component: Component): ResponseEntity<Any>
+
+    fun delete(id: String): ResponseEntity<Any>
 }

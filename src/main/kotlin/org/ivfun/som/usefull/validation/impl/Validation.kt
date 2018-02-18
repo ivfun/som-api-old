@@ -1,6 +1,7 @@
 package org.ivfun.som.usefull.validation.impl
 
-import org.ivfun.som.usefull.validation.annotation.IsRequiredToSave
+import org.ivfun.som.usefull.validation.annotation.IsRequiredToCreate
+import org.ivfun.som.usefull.validation.annotation.IsRequiredToUpdate
 import org.ivfun.som.usefull.validation.model.Response
 import java.util.ArrayList
 import kotlin.reflect.full.memberProperties
@@ -12,9 +13,15 @@ import kotlin.reflect.jvm.javaField
  **/
 object Validation
 {
-    fun toSave(any: Any) : Response
+    fun toCreate(any: Any) : Response
     {
-        val mapOf:Map<String, ArrayList<String>> = mapOf("is_required_to_save" to makeValidation(any, IsRequiredToSave::class.java))
+        val mapOf:Map<String, ArrayList<String>> = mapOf("is_required_to_create" to makeValidation(any, IsRequiredToCreate::class.java))
+        return Response(any, mapOf)
+    }
+
+    fun toUpdate(any: Any) : Response
+    {
+        val mapOf:Map<String, ArrayList<String>> = mapOf("is_required_to_update" to makeValidation(any, IsRequiredToUpdate::class.java))
         return Response(any, mapOf)
     }
 
@@ -43,5 +50,7 @@ object Validation
             }
         return field
     }
+
+
 
 }

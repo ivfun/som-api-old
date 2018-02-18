@@ -1,6 +1,6 @@
 package org.ivfun.som.usefull.validation.impl
 
-import org.ivfun.som.usefull.validation.annotation.IsRequiredToSave
+import org.ivfun.som.usefull.validation.annotation.IsRequiredToCreate
 import java.util.ArrayList
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.javaField
@@ -9,7 +9,7 @@ object Fields
 {
     fun getFieldsToSave(any: Any): Map<String, Any>
     {
-       return getFields(any,IsRequiredToSave::class.java )
+       return getFields(any, IsRequiredToCreate::class.java )
     }
 
     private fun getFields(any: Any, annotation: Class<out Annotation>): Map<String, Any>

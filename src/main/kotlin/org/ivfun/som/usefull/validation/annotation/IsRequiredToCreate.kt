@@ -7,4 +7,4 @@ package org.ivfun.som.usefull.validation.annotation
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
-annotation class IsRequiredToSave
+annotation class IsRequiredToCreate

@@ -17,8 +17,17 @@ class ComponentServiceImpl(val repository: ComponentRepository,
 : ComponentService
 {
     override
-    fun getAll() : ResponseEntity<Any> = responseFlow.findAll(repository,Component())
+    fun findOne(id : String):ResponseEntity<Any> = responseFlow.findOne(repository,id)
 
     override
-    fun save(component: Component) : ResponseEntity<Any> = responseFlow.saveFlow(repository, component)
+    fun findAll():ResponseEntity<Any> = responseFlow.findAll(repository,Component())
+
+    override
+    fun create(component: Component):ResponseEntity<Any> = responseFlow.createFlow(repository, component)
+
+    override
+    fun update(component: Component): ResponseEntity<Any> = responseFlow.updateFlow(repository, component)
+
+    override
+    fun delete(id : String): ResponseEntity<Any> = responseFlow.deleteFlow(repository,id)
 }

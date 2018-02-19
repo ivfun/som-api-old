@@ -9,9 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document(collection = "equipment")
 data class Equipment
 (
- val id: String?= null,
- val id_client: String?= null,
- val id_model: String?= null,
- val serial_number: String?= null,
- val description: String?= null
+        val id: String? = null,
+        val id_client: String? = null,
+        val id_model: String? = null,
+        val serial_number: String? = null,
+        val description: String? = null
 )

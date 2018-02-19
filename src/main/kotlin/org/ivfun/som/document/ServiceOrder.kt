@@ -11,10 +11,10 @@ import java.time.LocalDateTime
 @Document(collection = "service_order")
 data class ServiceOrder
 (
- val id: String?= null,
- val id_equipment: String?= null,
- val nf_number: Long?= null,
- val dt_hr_utc_start: LocalDateTime?= null,
- val dt_hr_utc_end: LocalDateTime?=null,
- val status: ServiceOrderStatus? = ServiceOrderStatus.CLOSE
+        val id: String? = null,
+        val id_equipment: String? = null,
+        val nf_number: Long? = null,
+        val dt_hr_utc_start: LocalDateTime? = null,
+        val dt_hr_utc_end: LocalDateTime? = null,
+        val status: ServiceOrderStatus? = ServiceOrderStatus.CLOSE
 )

@@ -9,6 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document(collection = "Solution")
 data class Solution
 (
- val id: String? = null,
- val description: String? = null
+        val id: String? = null,
+        val description: String? = null
 )

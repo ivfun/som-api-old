@@ -20,10 +20,10 @@ class LocalDateTimeUTC
     /**
      * Setting timezone in coordinated universal time
      */
-    fun timezone(i:Long): LocalDateTime = zonedDateTime.toLocalDateTime().plusHours(i)
+    fun timezone(i: Long): LocalDateTime = zonedDateTime.toLocalDateTime().plusHours(i)
 
     /**
      * Setting timezone in localDateTine
      */
-    fun timezone(localDateTime: LocalDateTime, i:Long): LocalDateTime = localDateTime.plusHours(i)
+    fun timezone(localDateTime: LocalDateTime, i: Long): LocalDateTime = localDateTime.plusHours(i)
 }

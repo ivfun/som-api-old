@@ -3,7 +3,7 @@ package org.ivfun.som.usefull.validation.model
 import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by: jonathan
@@ -12,8 +12,8 @@ import java.util.ArrayList
 class Response
 {
     @JsonIgnore
-    val entity  : Any
-    val errors  : Map<String, ArrayList<String>>
+    val entity: Any
+    val errors: Map<String, ArrayList<String>>
 
     constructor(entity: Any, errors: Map<String, ArrayList<String>>)
     {
@@ -28,9 +28,9 @@ class Response
     }
 
     @JsonIgnore
-    fun get() : ResponseEntity<Any>
+    fun get(): ResponseEntity<Any>
     {
-        if(isValid())
+        if (isValid())
         {
             return ResponseEntity(entity, HttpStatus.OK)
         }
@@ -38,21 +38,21 @@ class Response
     }
 
     @JsonIgnore
-    fun isValid() : Boolean
+    fun isValid(): Boolean
     {
-        var valid : Boolean = true
+        var valid: Boolean = true
         return try
         {
             errors.forEach { k, v ->
                 if (valid)
                 {
-                    valid = v.size==0
+                    valid = v.size == 0
                 }
             }
 
             valid
         }
-        catch (e :Exception)
+        catch (e: Exception)
         {
             false
         }

@@ -14,8 +14,8 @@ class ServiceOrderServiceImpl(val repository: ServiceOrderRepository)
 : ServiceOrderService
 {
     override
-    fun getAll() : Any = mapOf("ordem_servico" to repository.findAll())
+    fun getAll(): Any = mapOf("ordem_servico" to repository.findAll())
 
     override
-    fun save(serviceOrder: ServiceOrder) : Any = repository.save(serviceOrder)
+    fun save(serviceOrder: ServiceOrder): Any = repository.save(serviceOrder)
 }

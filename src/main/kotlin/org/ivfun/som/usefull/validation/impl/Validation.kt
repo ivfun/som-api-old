@@ -3,7 +3,7 @@ package org.ivfun.som.usefull.validation.impl
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToCreate
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToUpdate
 import org.ivfun.som.usefull.validation.model.Response
-import java.util.ArrayList
+import java.util.*
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.javaField
 
@@ -13,30 +13,31 @@ import kotlin.reflect.jvm.javaField
  **/
 object Validation
 {
-    fun toCreate(any: Any) : Response
+    fun toCreate(any: Any): Response
     {
-        val mapOf:Map<String, ArrayList<String>> = mapOf("is_required_to_create" to makeValidation(any, IsRequiredToCreate::class.java))
+        val mapOf: Map<String, ArrayList<String>> = mapOf("is_required_to_create" to makeValidation(any, IsRequiredToCreate::class.java))
         return Response(any, mapOf)
     }
 
-    fun toUpdate(any: Any) : Response
+    fun toUpdate(any: Any): Response
     {
-        val mapOf:Map<String, ArrayList<String>> = mapOf("is_required_to_update" to makeValidation(any, IsRequiredToUpdate::class.java))
+        val mapOf: Map<String, ArrayList<String>> = mapOf("is_required_to_update" to makeValidation(any, IsRequiredToUpdate::class.java))
         return Response(any, mapOf)
     }
 
-    private fun makeValidation(any: Any, annotation: Class<out Annotation>) : ArrayList<String>
+    private fun makeValidation(any: Any, annotation: Class<out Annotation>): ArrayList<String>
     {
         val field = ArrayList<String>()
         any.javaClass
            .kotlin
            .memberProperties
-           .forEach{ memberProperty ->
+           .forEach { memberProperty ->
                try
                {
                    if (memberProperty.javaField!!.isAnnotationPresent(annotation))
                    {
-                       if (memberProperty.get(any) == null)
+                       val value: Any? = memberProperty.get(any)
+                       if (isNullOrIsEmpty(value))
                        {
                            field.add(memberProperty.name)
                        }
@@ -47,10 +48,14 @@ object Validation
                    println("ué")
                }
 
-            }
+           }
         return field
     }
 
+    private fun isNullOrIsEmpty(value: Any?): Boolean
+    {
+        return value == null || value.toString().isEmpty()
+    }
 
 
 }

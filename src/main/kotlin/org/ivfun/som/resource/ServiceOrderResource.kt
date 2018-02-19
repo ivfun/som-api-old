@@ -1,10 +1,11 @@
 package org.ivfun.som.resource
+
 import org.ivfun.som.document.ServiceOrder
 import org.ivfun.som.service.ServiceOrderService
-import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 /**
  * Created by: jonathan
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping
  **/
 @RestController
 @RequestMapping(value = ["/service-order"])
-class ServiceOrderResource (val service: ServiceOrderService)
+class ServiceOrderResource(val service: ServiceOrderService)
 {
     @GetMapping()
     fun get(): Any = service.getAll()

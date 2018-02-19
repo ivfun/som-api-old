@@ -9,6 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document(collection = "service_order")
 data class Model
 (
- val id: String?= null,
- val description: String?= null
+        val id: String? = null,
+        val description: String? = null
 )

@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document(collection = "client")
 class Client
 (
- val id: String?= null,
- val cnpj: String?= null,
- val description: String?= null
+        val id: String? = null,
+        val cnpj: String? = null,
+        val description: String? = null
 )

@@ -1,6 +1,5 @@
 package org.ivfun.som.usefull.validation.impl
 
-
 import org.ivfun.som.usefull.validation.ResponseFlow
 import org.ivfun.som.usefull.validation.model.Response
 import org.springframework.data.mongodb.repository.MongoRepository
@@ -17,39 +16,50 @@ class ResponseFlowImpl<T> : ResponseFlow<T>
     override
     fun findOne(repository: MongoRepository<T, String>, id: String): ResponseEntity<Any>
     {
-        val toFindOne:T = repository.findOne(id)
+        val toFindOne: T = repository.findOne(id)
+        val mapOf: MutableMap<String, Any> = mutableMapOf()
 
-        if (toFindOne != null)
+        if (toFindOne == null)
         {
-            return Response(toFindOne).get()
+            mapOf["id"] = id
+            mapOf["not_found"] = true
+            return Response(mapOf).get()
         }
-        val mapOf: MutableMap<String,Any> = mutableMapOf()
-        mapOf["id"]  = id
-        mapOf["not_found"]  = true
-        return Response(mapOf).get()
+        return Response(mapOf(Fields.getEntityName(toFindOne) to toFindOne)).get()
     }
 
     override
-    fun findAll(repository : MongoRepository<T, String>, any:T): ResponseEntity<Any>
+    fun findAll(repository: MongoRepository<T, String>): ResponseEntity<Any>
     {
-        val mapOf = mapOf(Fields.getEntityName(any!!).plus('s') to repository.findAll())
+        val findAll: List<T> = repository.findAll()
+        val mapOf: MutableMap<String, Any> = mutableMapOf()
+        if (findAll.isEmpty())
+        {
+            mapOf["id"] = "\u2200"
+            mapOf["not_found"] = true
+            return Response(mapOf).get()
+        }
+        else
+        {
+            mapOf[Fields.getEntityName(findAll[0]!!).plus('s')] = findAll
+        }
         return Response(mapOf).get()
     }
 
     override
-    fun createFlow(repository : MongoRepository<T, String>, any:T): ResponseEntity<Any>
+    fun create(repository: MongoRepository<T, String>, any: T): ResponseEntity<Any>
     {
         val toSave: Response = Validation.toCreate(any!!)
 
         if (toSave.isValid())
         {
-            return Response(repository.save(any)!!).get()
+            return Response(mapOf(Fields.getEntityName(any) to repository.save(any)!!)).get()
         }
         return toSave.get()
     }
 
     override
-    fun updateFlow(repository: MongoRepository<T, String>, any: T): ResponseEntity<Any>
+    fun update(repository: MongoRepository<T, String>, any: T): ResponseEntity<Any>
     {
         val toUpdate: Response = Validation.toUpdate(any!!)
 
@@ -61,20 +71,16 @@ class ResponseFlowImpl<T> : ResponseFlow<T>
     }
 
     override
-    fun deleteFlow(repository: MongoRepository<T, String>, id: String): ResponseEntity<Any>
+    fun delete(repository: MongoRepository<T, String>, id: String): ResponseEntity<Any>
     {
-        val toDelete:T = repository.findOne(id)
-        val mapOf: MutableMap<String,Any> = mutableMapOf()
-        mapOf["id"]  = id
-        if (toDelete != null)
+        val find: T = repository.findOne(id)
+        val mapOf: MutableMap<String, Any> = mutableMapOf()
+        val toDelete: Boolean = find != null
+        mapOf["id"] = id
+        mapOf["deleted"] = toDelete
+        if (toDelete)
         {
             repository.delete(id)
-            mapOf["deleted"] =  true
-        }
-        else
-        {
-            mapOf["deleted"]  = false
-            mapOf["cause"] = "not found"
         }
         return Response(mapOf).get()
     }

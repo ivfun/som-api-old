@@ -2,7 +2,9 @@ package org.ivfun.som.document
 
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToCreate
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToUpdate
+import org.ivfun.som.usefull.validation.annotation.IsUniqueField
 import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
 
@@ -19,6 +21,7 @@ data class Component
 
         @Field(value = "description")
         @IsRequiredToCreate
+        @IsUniqueField
         val description: String? = null,
 
         @Field(value = "other")

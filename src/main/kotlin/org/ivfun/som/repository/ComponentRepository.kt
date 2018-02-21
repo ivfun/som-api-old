@@ -1,6 +1,7 @@
 package org.ivfun.som.repository
 
 import org.ivfun.som.document.Component
+import org.ivfun.som.usefull.validation.annotation.IsUniqueField
 import org.springframework.data.mongodb.repository.MongoRepository
 
 /**
@@ -9,5 +10,6 @@ import org.springframework.data.mongodb.repository.MongoRepository
  **/
 interface ComponentRepository : MongoRepository<Component, String>
 {
+    @IsUniqueField
     fun findByDescription(description: String): List<Component>
 }

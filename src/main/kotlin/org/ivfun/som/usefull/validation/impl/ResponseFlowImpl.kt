@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service
 @Service
 class ResponseFlowImpl<T> : ResponseFlow<T>
 {
+
     override
     fun findOne(repository: MongoRepository<T, String>, id: String): ResponseEntity<Any>
     {

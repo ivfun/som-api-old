@@ -2,7 +2,9 @@ package org.ivfun.som.usefull.validation.impl
 
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToCreate
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToUpdate
+import org.ivfun.som.usefull.validation.annotation.IsUniqueField
 import org.ivfun.som.usefull.validation.model.Response
+import org.springframework.data.mongodb.repository.MongoRepository
 import java.util.*
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.javaField
@@ -56,6 +58,4 @@ object Validation
     {
         return value == null || value.toString().isEmpty()
     }
-
-
 }

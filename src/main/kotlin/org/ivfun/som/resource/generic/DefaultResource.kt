@@ -1,7 +1,7 @@
 package org.ivfun.som.resource.generic
 
 import org.ivfun.som.usefull.validation.ResponseFlow
-import org.ivfun.som.usefull.validation.impl.Fields
+import org.ivfun.som.usefull.validation.impl.obj.Fields
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
  * Created by: jonathan
  * DateTime: 2018-02-20 16:02
  **/
-open class ResponseGeneric<T>(private val repository: MongoRepository<T,String>,
+open class DefaultResource<T>(private val repository: MongoRepository<T,String>,
                               private val response: ResponseFlow<T>)
 {
     @GetMapping(value = ["/fields-to-save"])

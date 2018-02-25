@@ -1,11 +1,10 @@
-package org.ivfun.som.usefull.validation.impl
+package org.ivfun.som.usefull.validation.impl.obj
 
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToCreate
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToUpdate
-import org.ivfun.som.usefull.validation.annotation.IsUniqueField
 import org.ivfun.som.usefull.validation.model.Response
-import org.springframework.data.mongodb.repository.MongoRepository
-import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.javaField
 
@@ -15,15 +14,23 @@ import kotlin.reflect.jvm.javaField
  **/
 object Validation
 {
+    const val is_valid_key = "is_valid"
+
     fun toCreate(any: Any): Response
     {
-        val mapOf: Map<String, ArrayList<String>> = mapOf("is_required_to_create" to makeValidation(any, IsRequiredToCreate::class.java))
+        val list: ArrayList<String> = makeValidation(any, IsRequiredToCreate::class.java)
+        val mapOf: MutableMap<String, Any> = mutableMapOf()
+        mapOf[is_valid_key] = list.size == 0
+        mapOf["is_required_to_create"] = list
         return Response(any, mapOf)
     }
 
     fun toUpdate(any: Any): Response
     {
-        val mapOf: Map<String, ArrayList<String>> = mapOf("is_required_to_update" to makeValidation(any, IsRequiredToUpdate::class.java))
+        val list: ArrayList<String> = makeValidation(any, IsRequiredToUpdate::class.java)
+        val mapOf: MutableMap<String, Any> = mutableMapOf()
+        mapOf[is_valid_key] = list.size == 0
+        mapOf["is_required_to_update"] = list
         return Response(any, mapOf)
     }
 
@@ -34,22 +41,14 @@ object Validation
            .kotlin
            .memberProperties
            .forEach { memberProperty ->
-               try
+               if (memberProperty.javaField!!.isAnnotationPresent(annotation))
                {
-                   if (memberProperty.javaField!!.isAnnotationPresent(annotation))
+                   val value: Any? = memberProperty.get(any)
+                   if (isNullOrIsEmpty(value))
                    {
-                       val value: Any? = memberProperty.get(any)
-                       if (isNullOrIsEmpty(value))
-                       {
-                           field.add(memberProperty.name)
-                       }
+                       field.add(memberProperty.name)
                    }
                }
-               catch (e: Exception)
-               {
-                   println("ué")
-               }
-
            }
         return field
     }

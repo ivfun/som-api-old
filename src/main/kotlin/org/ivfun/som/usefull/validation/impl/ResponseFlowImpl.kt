@@ -1,7 +1,12 @@
 package org.ivfun.som.usefull.validation.impl
 
 import org.ivfun.som.usefull.validation.ResponseFlow
+import org.ivfun.som.usefull.validation.impl.obj.Errors
+import org.ivfun.som.usefull.validation.impl.obj.Fields
+import org.ivfun.som.usefull.validation.impl.obj.Validation
 import org.ivfun.som.usefull.validation.model.Response
+import org.ivfun.som.usefull.validation.sequence.SequenceHelper
+import org.ivfun.som.usefull.validation.sequence.SequenceService
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
@@ -11,7 +16,7 @@ import org.springframework.stereotype.Service
  * DateTime: 2018-02-17 06:43
  **/
 @Service
-class ResponseFlowImpl<T> : ResponseFlow<T>
+class ResponseFlowImpl<T>(val sequence: SequenceService) : ResponseFlow<T>
 {
 
     override
@@ -54,7 +59,12 @@ class ResponseFlowImpl<T> : ResponseFlow<T>
 
         if (toSave.isValid())
         {
-            return Response(mapOf(Fields.getEntityName(any) to repository.save(any)!!)).get()
+            val sequenceHelper: SequenceHelper = sequence.containsAutoIncrement(any)
+            if (sequenceHelper.contains!!)
+            {
+                sequence.setNext(any, sequenceHelper)
+            }
+            return trySave(repository,any)
         }
         return toSave.get()
     }
@@ -66,7 +76,7 @@ class ResponseFlowImpl<T> : ResponseFlow<T>
 
         if (toUpdate.isValid())
         {
-            return Response(repository.save(any)!!).get()
+            return trySave(repository,any)
         }
         return toUpdate.get()
     }
@@ -84,5 +94,17 @@ class ResponseFlowImpl<T> : ResponseFlow<T>
             repository.delete(id)
         }
         return Response(mapOf).get()
+    }
+
+    private fun trySave(repository: MongoRepository<T, String>, any: T): ResponseEntity<Any>
+    {
+        return try
+        {
+            Response(mapOf(Fields.getEntityName(any!!) to repository.save(any)!!)).get()
+        }
+        catch (e:Exception)
+        {
+            Errors.get(e.message!!, any!!)
+        }
     }
 }

@@ -1,8 +1,9 @@
 package org.ivfun.som.document
 
+
+import org.ivfun.som.usefull.validation.annotation.AutoIncrement
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToCreate
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToUpdate
-import org.ivfun.som.usefull.validation.annotation.IsUniqueField
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
@@ -19,12 +20,13 @@ data class Component
         @IsRequiredToUpdate
         val id: String? = null,
 
-        @Field(value = "description")
-        @IsRequiredToCreate
-        @IsUniqueField
-        val description: String? = null,
+        @Indexed(unique = true)
+        @Field(value = "friendly_id")
+        @AutoIncrement(sequence = "component", increment = 1)
+        val friendly_id: Long? = null,
 
-        @Field(value = "other")
         @IsRequiredToCreate
-        val other: String? = null
+        @Indexed(unique = true)
+        @Field(value = "description")
+        val description: String? = null
 )

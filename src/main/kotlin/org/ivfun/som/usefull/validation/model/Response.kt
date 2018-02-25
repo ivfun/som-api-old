@@ -1,9 +1,9 @@
 package org.ivfun.som.usefull.validation.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import org.ivfun.som.usefull.validation.impl.obj.Validation
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import java.util.*
 
 /**
  * Created by: jonathan
@@ -13,9 +13,9 @@ class Response
 {
     @JsonIgnore
     val entity: Any
-    val errors: Map<String, ArrayList<String>>
+    val errors: Map<String, Any>
 
-    constructor(entity: Any, errors: Map<String, ArrayList<String>>)
+    constructor(entity: Any, errors: Map<String, Any>)
     {
         this.errors = errors
         this.entity = entity
@@ -23,7 +23,7 @@ class Response
 
     constructor(entity: Any)
     {
-        this.errors = mapOf()
+        this.errors = mapOf(Validation.is_valid_key to true)
         this.entity = entity
     }
 
@@ -34,23 +34,15 @@ class Response
         {
             return ResponseEntity(entity, HttpStatus.OK)
         }
-        return ResponseEntity(this, HttpStatus.NOT_ACCEPTABLE)
+        return ResponseEntity(errors, HttpStatus.NOT_ACCEPTABLE)
     }
 
     @JsonIgnore
     fun isValid(): Boolean
     {
-        var valid: Boolean = true
         return try
         {
-            errors.forEach { k, v ->
-                if (valid)
-                {
-                    valid = v.size == 0
-                }
-            }
-
-            valid
+           return  errors[Validation.is_valid_key] as Boolean
         }
         catch (e: Exception)
         {

@@ -1,11 +1,11 @@
-package org.ivfun.som.document
+package org.ivfun.som.app.document
 
 import org.ivfun.som.usefull.validation.annotation.AutoIncrement
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToCreate
 import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
-import org.springframework.data.mongodb.core.index.Indexed
 
 /**
  * Created by: jonathan

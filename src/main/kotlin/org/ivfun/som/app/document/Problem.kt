@@ -1,4 +1,4 @@
-package org.ivfun.som.document
+package org.ivfun.som.app.document
 
 import org.ivfun.som.usefull.validation.annotation.AutoIncrement
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToCreate
@@ -10,10 +10,10 @@ import org.springframework.data.mongodb.core.mapping.Field
 
 /**
  * Created by: jonathan
- * DateTime: 2018-02-11 03:51
+ * DateTime: 2018-02-11 04:01
  **/
-@Document(collection = "client")
-class Client
+@Document(collection = "problem")
+data class Problem
 (
         @Id
         @IsRequiredToUpdate
@@ -21,16 +21,11 @@ class Client
 
         @Indexed(unique = true)
         @Field(value = "friendly_id")
-        @AutoIncrement(sequence = "client", increment = 1)
+        @AutoIncrement(sequence = "problem", increment = 1)
         val friendly_id: Long? = null,
 
         @IsRequiredToCreate
         @Indexed(unique = true)
-        @Field(value = "cnpj")
-        val cnpj: String? = null,
-
-        @IsRequiredToCreate
         @Field(value = "description")
         val description: String? = null
 )
-

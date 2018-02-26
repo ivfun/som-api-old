@@ -3,8 +3,6 @@ package org.ivfun.som.usefull.validation.impl.obj
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToCreate
 import org.ivfun.som.usefull.validation.annotation.IsRequiredToUpdate
 import org.ivfun.som.usefull.validation.model.Response
-import kotlin.collections.ArrayList
-import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.javaField
 

@@ -1,7 +1,9 @@
-package org.ivfun.som.security
+package org.ivfun.som.security.service.impl
 
+import org.ivfun.som.security.service.TokenService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -18,14 +20,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableTransactionManagement
-class RequestConfiguration: WebSecurityConfigurerAdapter()
+class Request(val tokenService: TokenService) : WebSecurityConfigurerAdapter()
 {
 
     @Bean
     @Throws(Exception::class)
     fun filterBean(): AuthFilter
     {
-        val authAuthFilter: AuthFilter = AuthFilter()
+        val authAuthFilter: AuthFilter = AuthFilter(tokenService)
         authAuthFilter.setAuthenticationManager(super.authenticationManager())
         return authAuthFilter
     }
@@ -43,7 +45,11 @@ class RequestConfiguration: WebSecurityConfigurerAdapter()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .antMatchers("/**").permitAll()
+            .antMatchers(HttpMethod.GET,"/**").permitAll()
+            .antMatchers(HttpMethod.PUT,"/**").permitAll()
+            .antMatchers(HttpMethod.POST,"/**").permitAll()
+            .antMatchers(HttpMethod.DELETE,"/**").permitAll()
+            .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .exceptionHandling()

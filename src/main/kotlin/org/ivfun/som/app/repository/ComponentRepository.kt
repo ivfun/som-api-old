@@ -1,6 +1,6 @@
-package org.ivfun.som.repository
+package org.ivfun.som.app.repository
 
-import org.ivfun.som.document.Component
+import org.ivfun.som.app.document.Component
 import org.springframework.data.mongodb.repository.MongoRepository
 
 /**

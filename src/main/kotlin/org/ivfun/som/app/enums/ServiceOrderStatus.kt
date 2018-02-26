@@ -1,4 +1,4 @@
-package org.ivfun.som.enums
+package org.ivfun.som.app.enums
 
 /**
  * Created by: jonathan

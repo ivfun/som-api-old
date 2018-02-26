@@ -1,8 +1,8 @@
-package org.ivfun.som.resource
+package org.ivfun.som.app.resource
 
-import org.ivfun.som.document.Component
-import org.ivfun.som.repository.ComponentRepository
-import org.ivfun.som.resource.generic.DefaultResource
+import org.ivfun.som.app.document.Component
+import org.ivfun.som.app.repository.ComponentRepository
+import org.ivfun.som.app.resource.generic.GenericResource
 import org.ivfun.som.usefull.validation.ResponseFlow
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -14,4 +14,4 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping(value = ["/component"])
 class ComponentResource(val componentRepository: ComponentRepository, val responseFlow: ResponseFlow<Component>)
-: DefaultResource<Component>(componentRepository,responseFlow)
+: GenericResource<Component>(componentRepository,responseFlow)

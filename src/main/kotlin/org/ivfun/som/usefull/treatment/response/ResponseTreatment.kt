@@ -1,4 +1,4 @@
-package org.ivfun.som.usefull.validation
+package org.ivfun.som.usefull.treatment.response
 
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.http.ResponseEntity
@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity
  * Created by: jonathan
  * DateTime: 2018-02-17 06:43
  **/
-interface ResponseFlow<T>
+interface ResponseTreatment<T>
 {
     fun findOne(repository: MongoRepository<T, String>, id: String): ResponseEntity<Any>
 

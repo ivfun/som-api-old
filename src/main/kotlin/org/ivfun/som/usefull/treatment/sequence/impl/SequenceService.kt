@@ -1,6 +1,7 @@
-package org.ivfun.som.usefull.validation.sequence
+package org.ivfun.som.usefull.treatment.sequence.impl
 
-import org.ivfun.som.usefull.validation.annotation.AutoIncrement
+import org.ivfun.som.usefull.treatment.sequence.annotation.AutoIncrement
+import org.ivfun.som.usefull.treatment.sequence.SequenceRepository
 import org.springframework.stereotype.Service
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
@@ -34,7 +35,7 @@ class SequenceService(val repository: SequenceRepository)
 
                }
            }
-        return SequenceHelper(sequence,increment,contains, field)
+        return SequenceHelper(sequence, increment, contains, field)
     }
 
     fun setNext(any: Any, helper: SequenceHelper)
@@ -47,9 +48,9 @@ class SequenceService(val repository: SequenceRepository)
 
     private fun next(name:String, increment: Int):Long
     {
-        val current:Sequence = getSequence(name)
+        val current: Sequence = getSequence(name)
         val value:Long = current.value!! + increment
-        val next:Sequence = Sequence(current.id,current.name,value)
+        val next: Sequence = Sequence(current.id, current.name, value)
         repository.save(next)
         return value
     }

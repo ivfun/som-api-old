@@ -1,5 +1,6 @@
-package org.ivfun.som.usefull.validation.sequence
+package org.ivfun.som.usefull.treatment.sequence
 
+import org.ivfun.som.usefull.treatment.sequence.impl.Sequence
 import org.springframework.data.mongodb.repository.MongoRepository
 
 /**

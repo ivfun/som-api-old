@@ -8,6 +8,3 @@ import org.springframework.data.mongodb.repository.MongoRepository
  * DateTime: 2018-02-12 16:03
  **/
 interface SolutionRepository : MongoRepository<Solution, String>
-{
-
-}

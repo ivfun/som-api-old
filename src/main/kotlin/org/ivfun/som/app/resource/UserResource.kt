@@ -2,8 +2,8 @@ package org.ivfun.som.app.resource
 
 import org.ivfun.som.app.document.User
 import org.ivfun.som.app.repository.UserRepository
-import org.ivfun.som.app.resource.generic.GenericResource
-import org.ivfun.som.usefull.validation.ResponseFlow
+import org.ivfun.som.usefull.treatment.resource.GenericResource
+import org.ivfun.som.usefull.treatment.response.ResponseTreatment
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -13,5 +13,6 @@ import org.springframework.web.bind.annotation.RestController
  **/
 @RestController
 @RequestMapping(value = ["/user"])
-class UserResource(val userRepository: UserRepository, val responseFlow: ResponseFlow<User>)
-: GenericResource<User>(userRepository,responseFlow)
+class UserResource(userRepository: UserRepository,
+                   responseTreatment: ResponseTreatment<User>)
+: GenericResource<User>(userRepository, responseTreatment)

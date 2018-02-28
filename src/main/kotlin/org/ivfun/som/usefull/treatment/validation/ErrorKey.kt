@@ -1,4 +1,4 @@
-package org.ivfun.som.usefull.validation.impl
+package org.ivfun.som.usefull.treatment.validation
 
 /**
  * Created by: jonathan

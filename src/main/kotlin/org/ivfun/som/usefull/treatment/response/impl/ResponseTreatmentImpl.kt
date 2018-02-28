@@ -1,12 +1,11 @@
-package org.ivfun.som.usefull.validation.impl
+package org.ivfun.som.usefull.treatment.response.impl
 
-import org.ivfun.som.usefull.validation.ResponseFlow
-import org.ivfun.som.usefull.validation.impl.obj.Errors
-import org.ivfun.som.usefull.validation.impl.obj.Fields
-import org.ivfun.som.usefull.validation.impl.obj.Validation
-import org.ivfun.som.usefull.validation.model.Response
-import org.ivfun.som.usefull.validation.sequence.SequenceHelper
-import org.ivfun.som.usefull.validation.sequence.SequenceService
+import org.ivfun.som.usefull.treatment.response.ResponseTreatment
+import org.ivfun.som.usefull.treatment.validation.obj.Errors
+import org.ivfun.som.usefull.treatment.validation.obj.Fields
+import org.ivfun.som.usefull.treatment.validation.obj.Validation
+import org.ivfun.som.usefull.treatment.sequence.impl.SequenceHelper
+import org.ivfun.som.usefull.treatment.sequence.impl.SequenceService
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service
  * DateTime: 2018-02-17 06:43
  **/
 @Service
-class ResponseFlowImpl<T>(val sequence: SequenceService) : ResponseFlow<T>
+class ResponseTreatmentImpl<T>(val sequence: SequenceService) : ResponseTreatment<T>
 {
 
     override

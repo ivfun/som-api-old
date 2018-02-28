@@ -1,6 +1,6 @@
-package org.ivfun.som.usefull.validation.impl.obj
+package org.ivfun.som.usefull.treatment.validation.obj
 
-import org.ivfun.som.usefull.validation.annotation.IsRequiredToCreate
+import org.ivfun.som.usefull.treatment.validation.annotation.IsRequiredToCreate
 import org.springframework.data.mongodb.core.index.Indexed
 import java.util.*
 import kotlin.reflect.full.memberProperties
@@ -10,7 +10,7 @@ object Fields
 {
     fun getFieldsToSave(any: Any): Map<String, Any>
     {
-        return getFields(any, IsRequiredToCreate::class.java, "required_fields_to_save" )
+        return getFields(any, IsRequiredToCreate::class.java, "required_fields_to_save")
     }
 
     fun getFieldsUnique(any: Any): Map<String, Any>

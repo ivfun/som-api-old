@@ -1,4 +1,4 @@
-package org.ivfun.som.usefull.validation.annotation
+package org.ivfun.som.usefull.treatment.validation.annotation
 
 /**
  * Created by: jonathan
@@ -7,10 +7,4 @@ package org.ivfun.som.usefull.validation.annotation
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
-annotation class AutoIncrement
-(
-    val sequence: String,
-    val increment: Int
-)
-
-
+annotation class IsRequiredToCreate

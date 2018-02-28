@@ -1,8 +1,8 @@
-package org.ivfun.som.usefull.validation.impl.obj
+package org.ivfun.som.usefull.treatment.validation.obj
 
-import org.ivfun.som.usefull.validation.annotation.IsRequiredToCreate
-import org.ivfun.som.usefull.validation.annotation.IsRequiredToUpdate
-import org.ivfun.som.usefull.validation.model.Response
+import org.ivfun.som.usefull.treatment.validation.annotation.IsRequiredToCreate
+import org.ivfun.som.usefull.treatment.validation.annotation.IsRequiredToUpdate
+import org.ivfun.som.usefull.treatment.response.impl.Response
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.javaField
 

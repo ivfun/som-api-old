@@ -1,4 +1,4 @@
-package org.ivfun.som.usefull.validation.sequence
+package org.ivfun.som.usefull.treatment.sequence.impl
 import kotlin.reflect.KProperty1
 
 /**

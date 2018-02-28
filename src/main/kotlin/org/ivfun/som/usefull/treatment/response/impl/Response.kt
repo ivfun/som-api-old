@@ -1,7 +1,7 @@
-package org.ivfun.som.usefull.validation.model
+package org.ivfun.som.usefull.treatment.response.impl
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import org.ivfun.som.usefull.validation.impl.obj.Validation
+import org.ivfun.som.usefull.treatment.validation.obj.Validation
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 

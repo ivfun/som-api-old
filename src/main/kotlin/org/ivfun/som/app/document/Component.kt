@@ -1,8 +1,8 @@
 package org.ivfun.som.app.document
 
-import org.ivfun.som.usefull.validation.annotation.AutoIncrement
-import org.ivfun.som.usefull.validation.annotation.IsRequiredToCreate
-import org.ivfun.som.usefull.validation.annotation.IsRequiredToUpdate
+import org.ivfun.som.usefull.treatment.sequence.annotation.AutoIncrement
+import org.ivfun.som.usefull.treatment.validation.annotation.IsRequiredToCreate
+import org.ivfun.som.usefull.treatment.validation.annotation.IsRequiredToUpdate
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document

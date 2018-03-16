@@ -1,13 +1,13 @@
 package org.ivfun.som.usefull.treatment.validation.obj
 
-import org.ivfun.som.usefull.treatment.validation.ErrorKey
 import org.ivfun.som.usefull.treatment.response.impl.Response
+import org.ivfun.som.usefull.treatment.validation.ErrorKey
 import org.springframework.http.ResponseEntity
 
 object Errors
 {
 
-    fun get(details:String, any: Any): ResponseEntity<Any>
+    fun get(details: String, any: Any): ResponseEntity<Any>
     {
         val mapOf: MutableMap<String, Any> = mutableMapOf()
         val cause: ErrorKey = getCause(details)
@@ -20,7 +20,7 @@ object Errors
 
     private fun getFields(cause: ErrorKey, any: Any): Map<String, Any>
     {
-        return when(cause)
+        return when (cause)
         {
             ErrorKey.DUPLICATE_KEY_EXCEPTION ->
             {
@@ -28,7 +28,7 @@ object Errors
             }
             else ->
             {
-                mapOf<String,String>()
+                mapOf<String, String>()
             }
         }
 

@@ -22,14 +22,14 @@ object Fields
     {
         val field = ArrayList<String>()
         any.javaClass
-           .kotlin
-           .memberProperties
-           .forEach { memberProperty ->
-               if (memberProperty.javaField!!.isAnnotationPresent(annotation))
-               {
-                   field.add(memberProperty.name)
-               }
-           }
+                .kotlin
+                .memberProperties
+                .forEach { memberProperty ->
+                    if (memberProperty.javaField!!.isAnnotationPresent(annotation))
+                    {
+                        field.add(memberProperty.name)
+                    }
+                }
         return mapOf("entity" to getEntityName(any), key to field)
     }
 

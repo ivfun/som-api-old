@@ -18,19 +18,19 @@ object LocalDateTimeUtil
 
     fun timezone(localDateTime: LocalDateTime, i: Long): LocalDateTime = localDateTime.plusHours(i)
 
-    fun toLocalDateTime(any: Map<String,String>): LocalDateTime
+    fun toLocalDateTime(any: Map<String, String>): LocalDateTime
     {
         return try
         {
-            val year:Int = any["year"].toString().toInt()
-            val month:Int = any["monthValue"].toString().toInt()
-            val day:Int = any["dayOfMonth"].toString().toInt()
-            val hour:Int = any["hour"].toString().toInt()
-            val minute:Int = any["minute"].toString().toInt()
-            val second:Int = any["second"].toString().toInt()
+            val year: Int = any["year"].toString().toInt()
+            val month: Int = any["monthValue"].toString().toInt()
+            val day: Int = any["dayOfMonth"].toString().toInt()
+            val hour: Int = any["hour"].toString().toInt()
+            val minute: Int = any["minute"].toString().toInt()
+            val second: Int = any["second"].toString().toInt()
             LocalDateTime.of(year, month, day, hour, minute, second)
         }
-        catch (e:Exception)
+        catch (e: Exception)
         {
             throw Exception("invalid map to convert to localdatetime")
         }

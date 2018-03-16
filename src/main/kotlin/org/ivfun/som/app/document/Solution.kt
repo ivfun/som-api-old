@@ -23,7 +23,7 @@ data class Solution
         val friendly_id: Long? = null,
 
         @IsRequiredToCreate
-        @Field(value ="description" )
+        @Field(value = "description")
         val description: String? = null
 
 

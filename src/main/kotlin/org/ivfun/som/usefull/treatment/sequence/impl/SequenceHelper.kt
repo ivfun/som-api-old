@@ -1,4 +1,5 @@
 package org.ivfun.som.usefull.treatment.sequence.impl
+
 import kotlin.reflect.KProperty1
 
 /**
@@ -7,8 +8,8 @@ import kotlin.reflect.KProperty1
  **/
 class SequenceHelper
 (
-        val sequence:String?=null,
-        val increment:Int?=1,
-        val contains:Boolean?=false,
-        val field : KProperty1<Any, *>?=null
+        val sequence: String? = null,
+        val increment: Int? = 1,
+        val contains: Boolean? = false,
+        val field: KProperty1<Any, *>? = null
 )

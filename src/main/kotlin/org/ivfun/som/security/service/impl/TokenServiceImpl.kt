@@ -17,9 +17,9 @@ import java.time.LocalDateTime
 @Service
 class TokenServiceImpl : TokenService
 {
-    private val secret: String ="28064212"
-    private val expired: String ="expired-in"
-    private val expiration: Long =300L
+    private val secret: String = "28064212"
+    private val expired: String = "expired-in"
+    private val expiration: Long = 300L
 
     override
     fun generateToken(): Map<String, String>
@@ -30,7 +30,7 @@ class TokenServiceImpl : TokenService
     }
 
     override
-    fun generateToken(user:User): Map<String, String>
+    fun generateToken(user: User): Map<String, String>
     {
         val claims: MutableMap<String, Any> = mutableMapOf()
         claims[expired] = this.getExpiration()
@@ -44,25 +44,25 @@ class TokenServiceImpl : TokenService
     private fun generateToken(claims: Map<String, Any>): String
     {
         return Jwts.builder()
-                   .setClaims(claims)
-                   .setExpiration(DateUTC.nowPlusLong(expiration))
-                   .signWith(SignatureAlgorithm.HS512, secret)
-                   .compact()
+                .setClaims(claims)
+                .setExpiration(DateUTC.nowPlusLong(expiration))
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact()
     }
 
-    private fun getExpiration(): java.time.LocalDateTime =  LocalDateTimeUtil.now().plusSeconds(expiration)
+    private fun getExpiration(): java.time.LocalDateTime = LocalDateTimeUtil.now().plusSeconds(expiration)
 
     override
-    fun check(token: String):Boolean
+    fun check(token: String): Boolean
     {
         return try
         {
-            val claims:Claims = getClaimsFromToken(token)
+            val claims: Claims = getClaimsFromToken(token)
             val expired: LocalDateTime = LocalDateTimeUtil.toLocalDateTime(claims[expired] as Map<String, String>)
             val now: LocalDateTime = LocalDateTimeUtil.now()
             now.isBefore(expired)
         }
-        catch (e:Exception)
+        catch (e: Exception)
         {
             false
         }
@@ -73,9 +73,9 @@ class TokenServiceImpl : TokenService
         return try
         {
             Jwts.parser()
-                .setSigningKey(this.secret)
-                .parseClaimsJws(token)
-                .body
+                    .setSigningKey(this.secret)
+                    .parseClaimsJws(token)
+                    .body
 
         }
         catch (e: Exception)

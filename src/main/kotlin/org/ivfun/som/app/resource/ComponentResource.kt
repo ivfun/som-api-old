@@ -15,4 +15,4 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping(value = ["/component"])
 class ComponentResource(componentRepository: ComponentRepository,
                         responseTreatment: ResponseTreatment<Component>)
-: GenericResource<Component>(componentRepository, responseTreatment)
+    : GenericResource<Component>(componentRepository, responseTreatment)

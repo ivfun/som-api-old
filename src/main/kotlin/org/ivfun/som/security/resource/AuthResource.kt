@@ -18,5 +18,5 @@ class AuthResource(val service: TokenService)
     fun get() = service.generateToken()
 
     @GetMapping(value = ["valid"])
-    fun getValid(@RequestHeader("x") token:String) = service.check(token)
+    fun getValid(@RequestHeader("x") token: String) = service.check(token)
 }

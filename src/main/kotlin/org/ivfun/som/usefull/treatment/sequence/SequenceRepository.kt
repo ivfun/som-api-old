@@ -9,5 +9,5 @@ import org.springframework.data.mongodb.repository.MongoRepository
  **/
 interface SequenceRepository : MongoRepository<Sequence, String>
 {
-    fun findByName(name:String) : List<Sequence>
+    fun findByName(name: String): List<Sequence>
 }

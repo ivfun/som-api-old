@@ -42,7 +42,7 @@ class Response
     {
         return try
         {
-           return  errors[Validation.is_valid_key] as Boolean
+            return errors[Validation.is_valid_key] as Boolean
         }
         catch (e: Exception)
         {

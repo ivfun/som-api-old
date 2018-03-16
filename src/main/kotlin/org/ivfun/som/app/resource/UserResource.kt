@@ -15,4 +15,4 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping(value = ["/user"])
 class UserResource(userRepository: UserRepository,
                    responseTreatment: ResponseTreatment<User>)
-: GenericResource<User>(userRepository, responseTreatment)
+    : GenericResource<User>(userRepository, responseTreatment)

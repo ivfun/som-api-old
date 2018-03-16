@@ -1,11 +1,12 @@
 package org.ivfun.som.usefull.treatment.response.impl
 
 import org.ivfun.som.usefull.treatment.response.ResponseTreatment
+import org.ivfun.som.usefull.treatment.sequence.impl.SequenceHelper
+import org.ivfun.som.usefull.treatment.sequence.impl.SequenceService
+import org.ivfun.som.usefull.treatment.sequence.obj.SequenceFriendlyId
 import org.ivfun.som.usefull.treatment.validation.obj.Errors
 import org.ivfun.som.usefull.treatment.validation.obj.Fields
 import org.ivfun.som.usefull.treatment.validation.obj.Validation
-import org.ivfun.som.usefull.treatment.sequence.impl.SequenceHelper
-import org.ivfun.som.usefull.treatment.sequence.impl.SequenceService
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
@@ -63,7 +64,7 @@ class ResponseTreatmentImpl<T>(val sequence: SequenceService) : ResponseTreatmen
             {
                 sequence.setNext(any, sequenceHelper)
             }
-            return trySave(repository,any)
+            return trySave(repository, any)
         }
         return toSave.get()
     }
@@ -73,9 +74,11 @@ class ResponseTreatmentImpl<T>(val sequence: SequenceService) : ResponseTreatmen
     {
         val toUpdate: Response = Validation.toUpdate(any!!)
 
+        SequenceFriendlyId.setFriendlyId(repository, any)
+
         if (toUpdate.isValid())
         {
-            return trySave(repository,any)
+            return trySave(repository, any)
         }
         return toUpdate.get()
     }
@@ -101,7 +104,7 @@ class ResponseTreatmentImpl<T>(val sequence: SequenceService) : ResponseTreatmen
         {
             Response(mapOf(Fields.getEntityName(any!!) to repository.save(any)!!)).get()
         }
-        catch (e:Exception)
+        catch (e: Exception)
         {
             Errors.get(e.message!!, any!!)
         }

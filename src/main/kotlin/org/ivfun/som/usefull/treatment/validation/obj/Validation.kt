@@ -1,8 +1,8 @@
 package org.ivfun.som.usefull.treatment.validation.obj
 
+import org.ivfun.som.usefull.treatment.response.impl.Response
 import org.ivfun.som.usefull.treatment.validation.annotation.IsRequiredToCreate
 import org.ivfun.som.usefull.treatment.validation.annotation.IsRequiredToUpdate
-import org.ivfun.som.usefull.treatment.response.impl.Response
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.javaField
 
@@ -36,18 +36,18 @@ object Validation
     {
         val field = ArrayList<String>()
         any.javaClass
-           .kotlin
-           .memberProperties
-           .forEach { memberProperty ->
-               if (memberProperty.javaField!!.isAnnotationPresent(annotation))
-               {
-                   val value: Any? = memberProperty.get(any)
-                   if (isNullOrIsEmpty(value))
-                   {
-                       field.add(memberProperty.name)
-                   }
-               }
-           }
+                .kotlin
+                .memberProperties
+                .forEach { memberProperty ->
+                    if (memberProperty.javaField!!.isAnnotationPresent(annotation))
+                    {
+                        val value: Any? = memberProperty.get(any)
+                        if (isNullOrIsEmpty(value))
+                        {
+                            field.add(memberProperty.name)
+                        }
+                    }
+                }
         return field
     }
 

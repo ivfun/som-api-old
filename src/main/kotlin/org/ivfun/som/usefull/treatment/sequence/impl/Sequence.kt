@@ -12,10 +12,10 @@ import org.springframework.data.mongodb.core.mapping.Field
 @Document(collection = "sequence")
 class Sequence
 (
-    @Id
-    val id: String? = null,
-    @Indexed(unique = true)
-    @Field(value = "name")
-    val name: String? = null,
-    val value: Long? = 0
+        @Id
+        val id: String? = null,
+        @Indexed(unique = true)
+        @Field(value = "name")
+        val name: String? = null,
+        val value: Long? = 0
 )

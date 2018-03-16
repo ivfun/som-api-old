@@ -15,4 +15,4 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping(value = ["/solution"])
 class SolutionResource(solutionRepository: SolutionRepository,
                        responseTreatment: ResponseTreatment<Solution>)
-: GenericResource<Solution>(solutionRepository, responseTreatment)
+    : GenericResource<Solution>(solutionRepository, responseTreatment)

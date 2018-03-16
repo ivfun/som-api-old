@@ -9,8 +9,8 @@ package org.ivfun.som.usefull.treatment.sequence.annotation
 @MustBeDocumented
 annotation class AutoIncrement
 (
-    val sequence: String,
-    val increment: Int
+        val sequence: String,
+        val increment: Int
 )
 
 

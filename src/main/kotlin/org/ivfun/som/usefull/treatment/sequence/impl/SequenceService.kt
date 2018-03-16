@@ -1,7 +1,7 @@
 package org.ivfun.som.usefull.treatment.sequence.impl
 
-import org.ivfun.som.usefull.treatment.sequence.annotation.AutoIncrement
 import org.ivfun.som.usefull.treatment.sequence.SequenceRepository
+import org.ivfun.som.usefull.treatment.sequence.annotation.AutoIncrement
 import org.springframework.stereotype.Service
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.memberProperties
@@ -15,41 +15,41 @@ import kotlin.reflect.jvm.javaField
 class SequenceService(val repository: SequenceRepository)
 {
 
-    fun containsAutoIncrement(any:Any): SequenceHelper
+    fun containsAutoIncrement(any: Any): SequenceHelper
     {
-        var sequence:String=""
-        var increment:Int=1
-        var contains:Boolean = false
-        var field:KProperty1<Any, *>?=null
+        var sequence: String = ""
+        var increment: Int = 1
+        var contains: Boolean = false
+        var field: KProperty1<Any, *>? = null
 
         any.javaClass
-           .kotlin
-           .memberProperties
-           .forEach { memberProperty ->
-               if (memberProperty.javaField!!.isAnnotationPresent(AutoIncrement::class.java))
-               {
-                   sequence = memberProperty.javaField!!.getDeclaredAnnotation(AutoIncrement::class.java).sequence
-                   increment = memberProperty.javaField!!.getDeclaredAnnotation(AutoIncrement::class.java).increment
-                   contains = true
-                   field =  memberProperty
+                .kotlin
+                .memberProperties
+                .forEach { memberProperty ->
+                    if (memberProperty.javaField!!.isAnnotationPresent(AutoIncrement::class.java))
+                    {
+                        sequence = memberProperty.javaField!!.getDeclaredAnnotation(AutoIncrement::class.java).sequence
+                        increment = memberProperty.javaField!!.getDeclaredAnnotation(AutoIncrement::class.java).increment
+                        contains = true
+                        field = memberProperty
 
-               }
-           }
+                    }
+                }
         return SequenceHelper(sequence, increment, contains, field)
     }
 
     fun setNext(any: Any, helper: SequenceHelper)
     {
-        val next:Long = next(helper.sequence!!, helper.increment!!)
+        val next: Long = next(helper.sequence!!, helper.increment!!)
         helper.field!!.javaField!!.trySetAccessible()
         helper.field.javaField!!.set(any, next)
 
     }
 
-    private fun next(name:String, increment: Int):Long
+    private fun next(name: String, increment: Int): Long
     {
         val current: Sequence = getSequence(name)
-        val value:Long = current.value!! + increment
+        val value: Long = current.value!! + increment
         val next: Sequence = Sequence(current.id, current.name, value)
         repository.save(next)
         return value

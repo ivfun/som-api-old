@@ -12,7 +12,7 @@ object DateUTC
 {
     fun nowPlusLong(time: Long?): Date
     {
-        val sec:Long = Timestamp.valueOf(LocalDateTime.now().plusSeconds(time!!)).time
+        val sec: Long = Timestamp.valueOf(LocalDateTime.now().plusSeconds(time!!)).time
         return Date(sec)
     }
 }
